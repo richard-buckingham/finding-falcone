@@ -31,11 +31,11 @@ describe("HeaderComponent", () => {
     expect(el.textContent).toContain(component.title);
   });
 
-  it("should display a font-awesome icon", () => {
+  it("should display font-awesome icon fa-space-shuttle", () => {
     const de: DebugElement = fixture.debugElement.query(By.css("nav>a>i"));
     const el = de.nativeElement;
 
     expect(el).toBeTruthy();
-    expect(el.className).toContain("fa-address-book-o");
+    expect(el.className).toContain("fa-space-shuttle");
   });
 });
