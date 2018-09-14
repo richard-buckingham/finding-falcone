@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
+import { HttpClientModule } from "@angular/common/http";
+
 import { FindingFalconeComponent } from "./finding-falcone.component";
 import { FooterComponent } from "../../components//footer/footer.component";
 
@@ -9,7 +11,8 @@ describe("FindingFalconeComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FindingFalconeComponent, FooterComponent]
+      declarations: [FindingFalconeComponent, FooterComponent],
+      imports: [HttpClientModule]
     }).compileComponents();
   }));
 
