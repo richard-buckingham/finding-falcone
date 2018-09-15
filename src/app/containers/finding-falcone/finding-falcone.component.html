@@ -7,22 +7,26 @@
   <div class="row title">
     <div class="col col-3 ">
       <div class="font-weight-bold text-center">Destination 1</div>
-      <journey-selector [destinationNumber]="1" [planets]="planets" [vehicles]="vehicles" (selectedDestination)='selectedDestination($event)'>
+      <journey-selector [destinationNumber]="1" [planets]="availablePlanets" [vehicles]="vehicles"
+        (selectedDestination)='selectedDestination($event)'>
       </journey-selector>
     </div>
     <div class="col col-3 text-center">
       <span class="font-weight-bold">Destination 2</span>
-      <journey-selector [destinationNumber]="2" [planets]="planets" [vehicles]="vehicles" (selectedDestination)='selectedDestination($event)'>
+      <journey-selector [destinationNumber]="2" [planets]="availablePlanets" [vehicles]="vehicles"
+        (selectedDestination)='selectedDestination($event)'>
       </journey-selector>
     </div>
     <div class="col col-3 text-center">
       <span class="font-weight-bold">Destination 3</span>
-      <journey-selector>
+      <journey-selector [destinationNumber]="3" [planets]="availablePlanets" [vehicles]="vehicles"
+        (selectedDestination)='selectedDestination($event)'>
       </journey-selector>
     </div>
     <div class="col col-3 text-center">
       <span class="font-weight-bold">Destination 4</span>
-      <journey-selector>
+      <journey-selector [destinationNumber]="4" [planets]="availablePlanets" [vehicles]="vehicles"
+        (selectedDestination)='selectedDestination($event)'>
       </journey-selector>
     </div>
   </div>
@@ -30,6 +34,7 @@
   <br />
   <h6>Time taken : tbc...</h6>
   <pre>selectedDestinations : {{selectedDestinations | json}}</pre>
+  <pre>availablePlanets : {{availablePlanets | json}}</pre>
 
   <app-footer></app-footer>
 </div>

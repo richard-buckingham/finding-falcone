@@ -14,6 +14,7 @@ import { SelectedDestination } from "../../models/SelectedDestination";
 export class FindingFalconeComponent implements OnInit {
   private token: string;
   private planets: IPlanet[];
+  private availablePlanets: IPlanet[];
   private selectedDestinations: SelectedDestination[] = [];
   private vehicles: IVehicle[];
 
@@ -35,7 +36,8 @@ export class FindingFalconeComponent implements OnInit {
   getPlanets(): void {
     this.apiService.getPlanets().subscribe(planets => {
       console.log(`planets = `, planets);
-      this.planets = planets;
+      this.planets = [...planets];
+      this.availablePlanets = [...planets];
     });
   }
 
@@ -48,6 +50,7 @@ export class FindingFalconeComponent implements OnInit {
 
   selectedDestination(selectedDestination: SelectedDestination): void {
     this.maintainSelectedDestinations(selectedDestination);
+    this.maintainAvailablePlanets(selectedDestination);
   }
 
   private maintainSelectedDestinations(
@@ -69,5 +72,15 @@ export class FindingFalconeComponent implements OnInit {
       selectedDestination
     ];
     console.log(`this.selectedDestinations = `, this.selectedDestinations);
+  }
+
+  private maintainAvailablePlanets(
+    selectedDestination: SelectedDestination
+  ): void {
+    // If a planet has been selected, remove it from the list if available planets
+    this.availablePlanets = this.availablePlanets.filter(
+      planet => planet.name !== selectedDestination.planetName
+    );
+    console.log(`this.availablePlanets = `, this.availablePlanets);
   }
 }
