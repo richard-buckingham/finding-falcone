@@ -1,15 +1,18 @@
 <form [formGroup]="journeyForm">
 
   <div class="form-group planet-select">
-    <select class="form-control" id="planet" formControlName="planet">
+    <select *ngIf="!selectedPlanetName" class="form-control" id="planet" formControlName="planet">
       <option></option>
       <option *ngFor="let planet of planets">{{planet.name}}</option>
     </select>
+    <input *ngIf="selectedPlanetName" class="form-control" type="text" formControlName="selectedPlanetName" disabled>
   </div>
 
-  <div *ngIf="journeyForm.value.planet">
+  <div *ngIf="
+      journeyForm.value.planet">
     <div class="vehicles" *ngFor="let vehicle of vehicles">
-      <input class="form-check-input" type="radio" formControlName="food" value="{{vehicle.name}}" (change)="processDestination()">
+      <input class="form-check-input" type="radio" formControlName="food" value="{{vehicle.name}}" (change)="processDestination()"
+        [disabled]="selectedPlanetName">
       <label class="form-check-label">{{vehicle.name}} ({{vehicle.total_no}})</label>
     </div>
   </div>
@@ -20,4 +23,5 @@
   <!-- <pre>{{ planets | json }}</pre>
   <br />
   <pre>{{ vehicles | json }}</pre> -->
+  <!-- selectedPlanetName: {{ selectedPlanetName}} -->
 </form>

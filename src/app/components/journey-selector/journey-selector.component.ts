@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges
+} from "@angular/core";
 import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
 
 import { IPlanet } from "../../models/IPlanet";
@@ -10,7 +17,7 @@ import { SelectedDestination } from "../../models/SelectedDestination";
   templateUrl: "./journey-selector.component.html",
   styleUrls: ["./journey-selector.component.scss"]
 })
-export class JourneySelectorComponent implements OnInit {
+export class JourneySelectorComponent implements OnInit, OnChanges {
   @Input()
   destinationNumber: number;
 
@@ -23,15 +30,23 @@ export class JourneySelectorComponent implements OnInit {
   @Output()
   selectedDestination = new EventEmitter<SelectedDestination>();
 
-  public journeyForm: FormGroup;
+  journeyForm: FormGroup;
+  selectedPlanetName: string;
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.journeyForm = this.formBuilder.group({
       planet: [""],
-      food: [""]
+      food: [""],
+      selectedPlanetName: [""]
     });
+  }
+
+  ngOnChanges() {
+    //if (this.selectedPlanetName) {
+    //  this.journeyForm.patchValue({ planet: this.selectedPlanetName });
+    //}
   }
 
   processDestination(): void {
@@ -40,7 +55,10 @@ export class JourneySelectorComponent implements OnInit {
       this.journeyForm.value.planet,
       this.journeyForm.value.food
     );
-    //console.log("selectedDest = ", selectedDest);
+    this.selectedPlanetName = this.journeyForm.value.planet;
+    this.journeyForm.patchValue({
+      selectedPlanetName: this.selectedPlanetName
+    });
     this.selectedDestination.emit(selectedDest);
   }
 }
