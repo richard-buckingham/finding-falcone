@@ -12,12 +12,12 @@ import { SelectedDestination } from "../../models/SelectedDestination";
   styleUrls: ["./finding-falcone.component.scss"]
 })
 export class FindingFalconeComponent implements OnInit {
-  private token: string;
-  private planets: IPlanet[];
-  private availablePlanets: IPlanet[];
-  private selectedDestinations: SelectedDestination[] = [];
-  private vehicles: IVehicle[];
-  private timeTaken = 0;
+  token: string;
+  planets: IPlanet[];
+  availablePlanets: IPlanet[];
+  selectedDestinations: SelectedDestination[] = [];
+  vehicles: IVehicle[];
+  timeTaken = 0;
 
   constructor(private apiService: ApiService) {}
 
