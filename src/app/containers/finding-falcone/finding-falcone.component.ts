@@ -17,6 +17,7 @@ export class FindingFalconeComponent implements OnInit {
   private availablePlanets: IPlanet[];
   private selectedDestinations: SelectedDestination[] = [];
   private vehicles: IVehicle[];
+  private timeTaken = 0;
 
   constructor(private apiService: ApiService) {}
 
@@ -51,6 +52,7 @@ export class FindingFalconeComponent implements OnInit {
   selectedDestination(selectedDestination: SelectedDestination): void {
     this.maintainSelectedDestinations(selectedDestination);
     this.maintainAvailablePlanets(selectedDestination);
+    this.timeTaken = this.calculateTimeTaken();
   }
 
   private maintainSelectedDestinations(
@@ -82,5 +84,19 @@ export class FindingFalconeComponent implements OnInit {
       planet => planet.name !== selectedDestination.planetName
     );
     console.log(`this.availablePlanets = `, this.availablePlanets);
+  }
+
+  private calculateTimeTaken(): number {
+    let timeTaken: number = 0;
+
+    for (let destination of this.selectedDestinations) {
+      let planet = this.planets.find(pl => pl.name === destination.planetName);
+      let vehicle = this.vehicles.find(
+        ve => ve.name === destination.vehicleName
+      );
+      timeTaken += planet.distance / vehicle.speed;
+    }
+
+    return timeTaken;
   }
 }
