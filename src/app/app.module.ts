@@ -2,6 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
 
 import { AppComponent } from "./app.component";
 import { HeaderComponent } from "./components/header/header.component";
@@ -10,6 +11,7 @@ import { FindingFalconeComponent } from "./containers/finding-falcone/finding-fa
 
 import { ApiService } from "./services/api.service";
 import { JourneySelectorComponent } from "./components/journey-selector/journey-selector.component";
+import { ResultComponent } from "./components/result/result.component";
 
 @NgModule({
   declarations: [
@@ -17,9 +19,20 @@ import { JourneySelectorComponent } from "./components/journey-selector/journey-
     HeaderComponent,
     FooterComponent,
     FindingFalconeComponent,
-    JourneySelectorComponent
+    JourneySelectorComponent,
+    ResultComponent
   ],
-  imports: [BrowserModule, HttpClientModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot([
+      { path: "finding-falcone", component: FindingFalconeComponent },
+      { path: "result", component: ResultComponent },
+      { path: "", redirectTo: "FindingFalcone", pathMatch: "full" },
+      { path: "**", redirectTo: "FindingFalcone", pathMatch: "full" }
+    ])
+  ],
   providers: [ApiService],
   bootstrap: [AppComponent]
 })
