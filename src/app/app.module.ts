@@ -29,8 +29,8 @@ import { ResultComponent } from "./components/result/result.component";
     RouterModule.forRoot([
       { path: "finding-falcone", component: FindingFalconeComponent },
       { path: "result", component: ResultComponent },
-      { path: "", redirectTo: "FindingFalcone", pathMatch: "full" },
-      { path: "**", redirectTo: "FindingFalcone", pathMatch: "full" }
+      { path: "", redirectTo: "finding-falcone", pathMatch: "full" },
+      { path: "**", redirectTo: "finding-falcone", pathMatch: "full" }
     ])
   ],
   providers: [ApiService],
