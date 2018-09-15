@@ -6,6 +6,7 @@ import { Observable, throwError } from "rxjs";
 import { catchError, tap, map } from "rxjs/operators";
 
 import { IPlanet } from "../models/IPlanet";
+import { IVehicle } from "../models/IVehicle";
 
 @Injectable({
   providedIn: "root"
@@ -13,6 +14,7 @@ import { IPlanet } from "../models/IPlanet";
 export class ApiService {
   private tokenUrl = "https://findfalcone.herokuapp.com/token";
   private planetsUrl = "https://findfalcone.herokuapp.com/planets";
+  private vehiclesUrl = "https://findfalcone.herokuapp.com/vehicles";
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -31,6 +33,13 @@ export class ApiService {
 
   getPlanets(): Observable<IPlanet[]> {
     return this.http.get<IPlanet[]>(this.planetsUrl).pipe(
+      tap(data => console.log("All: " + JSON.stringify(data))),
+      catchError(this.handleError)
+    );
+  }
+
+  getVehicles(): Observable<IVehicle[]> {
+    return this.http.get<IVehicle[]>(this.vehiclesUrl).pipe(
       tap(data => console.log("All: " + JSON.stringify(data))),
       catchError(this.handleError)
     );
