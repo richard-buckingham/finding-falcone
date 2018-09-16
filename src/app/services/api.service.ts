@@ -7,6 +7,7 @@ import { catchError, tap, map } from "rxjs/operators";
 
 import { IPlanet } from "../models/IPlanet";
 import { IVehicle } from "../models/IVehicle";
+import { FindFalconeRequest } from "../models/FindFalconeRequest";
 
 @Injectable({
   providedIn: "root"
@@ -15,6 +16,7 @@ export class ApiService {
   private tokenUrl = "https://findfalcone.herokuapp.com/token";
   private planetsUrl = "https://findfalcone.herokuapp.com/planets";
   private vehiclesUrl = "https://findfalcone.herokuapp.com/vehicles";
+  private findFalconeUrl = "https://findfalcone.herokuapp.com/find";
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -24,7 +26,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  getToken(): Observable<string> {
+  getToken(): Observable<any> {
     return this.http.post<string>(this.tokenUrl, "", this.httpOptions).pipe(
       tap(data => console.log("All: " + JSON.stringify(data))),
       catchError(this.handleError)
@@ -43,6 +45,24 @@ export class ApiService {
       tap(data => console.log("All: " + JSON.stringify(data))),
       catchError(this.handleError)
     );
+  }
+
+  findFalcone(findFalconeRequest: FindFalconeRequest): Observable<any> {
+    console.log("findFalconeRequest in api = ", findFalconeRequest);
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      })
+    };
+
+    return this.http
+      .post<string>(this.findFalconeUrl, findFalconeRequest, httpOptions)
+      .pipe(
+        tap(data => console.log("All: " + JSON.stringify(data))),
+        catchError(this.handleError)
+      );
   }
 
   private handleError(err: HttpErrorResponse) {

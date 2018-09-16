@@ -1,10 +1,14 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 import { ApiService } from "../../services/api.service";
+import { StateService } from "../../services/state.service";
 
 import { IPlanet } from "../../models/IPlanet";
 import { IVehicle } from "../../models/IVehicle";
 import { SelectedDestination } from "../../models/SelectedDestination";
+
+import { FindFalconeRequest } from "../../models/FindFalconeRequest";
 
 @Component({
   selector: "finding-falcone",
@@ -12,14 +16,18 @@ import { SelectedDestination } from "../../models/SelectedDestination";
   styleUrls: ["./finding-falcone.component.scss"]
 })
 export class FindingFalconeComponent implements OnInit {
-  token: string;
+  token: any;
   planets: IPlanet[];
   availablePlanets: IPlanet[];
   selectedDestinations: SelectedDestination[] = [];
   vehicles: IVehicle[];
   timeTaken = 0;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private stateService: StateService
+  ) {}
 
   ngOnInit() {
     this.getToken();
@@ -30,7 +38,7 @@ export class FindingFalconeComponent implements OnInit {
   getToken(): void {
     this.apiService.getToken().subscribe(token => {
       console.log(`token = `, token);
-      this.token = token;
+      this.token = token.token;
     });
   }
 
@@ -98,5 +106,24 @@ export class FindingFalconeComponent implements OnInit {
     }
 
     return timeTaken;
+  }
+
+  find(): void {
+    let request: FindFalconeRequest = new FindFalconeRequest();
+    let planet_names = new Array<string>();
+    let vehicle_names = new Array<string>();
+
+    for (let destination of this.selectedDestinations) {
+      planet_names.push(destination.planetName);
+      vehicle_names.push(destination.vehicleName);
+    }
+
+    request.token = this.token;
+    request.planet_names = [...planet_names];
+    request.vehicle_names = [...vehicle_names];
+
+    this.stateService.setFindFalconeRequest(request);
+
+    this.router.navigate(["/result"]);
   }
 }
