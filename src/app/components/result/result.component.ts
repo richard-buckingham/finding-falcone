@@ -38,4 +38,8 @@ export class ResultComponent implements OnInit {
       this.responseError = response.error ? response.error : "";
     });
   }
+
+  home(): void {
+    this.router.navigate([""]);
+  }
 }
