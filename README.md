@@ -1,27 +1,22 @@
 # FindingFalcone
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+To view the deployed version, browse to https://findingfalcone.firebaseapp.com/finding-falcone
 
-## Development server
+## Run the Code Locally:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Note: This project is built with Angular 6 and Angular-Cli 6.0.8.
+Consequently, as described on https://www.npmjs.com/package/@angular/cli/v/6.0.8 you need node version 8.9 or higher installed to run the code locally.
 
-## Code scaffolding
+After cloning the code, run the following commands in the root of the project:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- npm install
 
-## Build
+- npm run-script ng serve
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Then navigate to http://localhost:4200/
 
-## Running unit tests
+## Unit Tests:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To run the tests, run the following command in the root of the project.
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- npm run-script ng test
