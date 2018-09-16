@@ -1,5 +1,7 @@
 # FindingFalcone
 
+## Run Deployed Site:
+
 To view the deployed version, browse to https://findingfalcone.firebaseapp.com/finding-falcone
 
 ## Run the Code Locally:
