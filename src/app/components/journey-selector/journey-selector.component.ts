@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges
-} from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormControl, FormGroup, FormBuilder } from "@angular/forms";
 
 import { IPlanet } from "../../models/IPlanet";
@@ -17,7 +10,7 @@ import { SelectedDestination } from "../../models/SelectedDestination";
   templateUrl: "./journey-selector.component.html",
   styleUrls: ["./journey-selector.component.scss"]
 })
-export class JourneySelectorComponent implements OnInit, OnChanges {
+export class JourneySelectorComponent implements OnInit {
   @Input()
   destinationNumber: number;
 
@@ -41,12 +34,6 @@ export class JourneySelectorComponent implements OnInit, OnChanges {
       food: [""],
       selectedPlanetName: [""]
     });
-  }
-
-  ngOnChanges() {
-    //if (this.selectedPlanetName) {
-    //  this.journeyForm.patchValue({ planet: this.selectedPlanetName });
-    //}
   }
 
   processDestination(): void {

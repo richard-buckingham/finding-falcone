@@ -11,9 +11,9 @@
   <div *ngIf="
       journeyForm.value.planet">
     <div class="vehicles" *ngFor="let vehicle of vehicles">
-      <input class="form-check-input" type="radio" formControlName="food" value="{{vehicle.name}}" (change)="processDestination()"
-        [disabled]="selectedPlanetName">
-      <label class="form-check-label">{{vehicle.name}} ({{vehicle.total_no}})</label>
+      <input class="form-check-input" type="radio" formControlName="food" id="{{vehicle.name+destinationNumber}}" value="{{vehicle.name}}"
+        (change)="processDestination()" [disabled]="selectedPlanetName">
+      <label class="form-check-label" for="{{vehicle.name+destinationNumber}}">{{vehicle.name}} ({{vehicle.total_no}})</label>
     </div>
   </div>
 
