@@ -123,6 +123,7 @@ export class FindingFalconeComponent implements OnInit {
     request.vehicle_names = [...vehicle_names];
 
     this.stateService.setFindFalconeRequest(request);
+    this.stateService.setTimeTaken(this.calculateTimeTaken());
 
     this.router.navigate(["/result"]);
   }

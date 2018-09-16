@@ -9,9 +9,14 @@ import { FindFalconeRequest } from "../../models/FindFalconeRequest";
 @Component({
   selector: "result",
   templateUrl: "./result.component.html",
-  styleUrls: ["./result.component.css"]
+  styleUrls: ["./result.component.scss"]
 })
 export class ResultComponent implements OnInit {
+  responseStatus: string;
+  responsePlanetName: string;
+  responseError: string;
+  timeTaken: number;
+
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -20,14 +25,17 @@ export class ResultComponent implements OnInit {
 
   ngOnInit() {
     this.findFalcone();
+    this.timeTaken = this.stateService.getTimeTaken();
   }
 
   findFalcone(): void {
     const request: FindFalconeRequest = this.stateService.getFindFalconeRequest();
-    console.log("FindFalconeRequest = ", request);
     this.apiService.findFalcone(request).subscribe(response => {
-      console.log(`response = `, response);
-      //this.token = token;
+      this.responseStatus = response.status ? response.status : "";
+      this.responsePlanetName = response.planet_name
+        ? response.planet_name
+        : "";
+      this.responseError = response.error ? response.error : "";
     });
   }
 }

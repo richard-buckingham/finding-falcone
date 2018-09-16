@@ -1,3 +1,20 @@
-<p>
-  result works!
-</p>
+<div class="row ">
+  <div class="col col-12 text-center">
+
+    <div *ngIf="responseStatus === 'success'">
+      <h2>Success! We found Falcone!!!</h2>
+      <br>
+      <h4>Time taken: {{timeTaken}}</h4>
+      <h4>Planet found: {{responsePlanetName}}</h4>
+    </div>
+
+    <div *ngIf="responseStatus === 'false'">
+      <h2>No luck this time, we didn't find Falcone. Shall we try again? </h2>
+    </div>
+
+  </div>
+
+  <div class="col col-12 text-center error" *ngIf="responseError">
+    <h4>Error Occurred: {{responseError}}</h4>
+  </div>
+</div>

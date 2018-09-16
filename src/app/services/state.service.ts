@@ -17,11 +17,11 @@ export class StateService {
     return this.findFalconeRequest;
   }
 
-  setTimeTakem(timeTaken: number): void {
+  setTimeTaken(timeTaken: number): void {
     this.timeTaken = timeTaken;
   }
 
-  getTimeTakem(): number {
+  getTimeTaken(): number {
     return this.timeTaken;
   }
 }
