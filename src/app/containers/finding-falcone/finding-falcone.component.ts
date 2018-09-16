@@ -37,14 +37,12 @@ export class FindingFalconeComponent implements OnInit {
 
   getToken(): void {
     this.apiService.getToken().subscribe(token => {
-      console.log(`token = `, token);
       this.token = token.token;
     });
   }
 
   getPlanets(): void {
     this.apiService.getPlanets().subscribe(planets => {
-      console.log(`planets = `, planets);
       this.planets = [...planets];
       this.availablePlanets = [...planets];
     });
@@ -52,7 +50,6 @@ export class FindingFalconeComponent implements OnInit {
 
   getVehicles(): void {
     this.apiService.getVehicles().subscribe(vehicles => {
-      console.log(`vehicles = `, vehicles);
       this.vehicles = vehicles;
     });
   }
@@ -60,6 +57,7 @@ export class FindingFalconeComponent implements OnInit {
   selectedDestination(selectedDestination: SelectedDestination): void {
     this.maintainSelectedDestinations(selectedDestination);
     this.maintainAvailablePlanets(selectedDestination);
+    this.maintainVehicles(selectedDestination);
     this.timeTaken = this.calculateTimeTaken();
   }
 
@@ -91,7 +89,16 @@ export class FindingFalconeComponent implements OnInit {
     this.availablePlanets = this.availablePlanets.filter(
       planet => planet.name !== selectedDestination.planetName
     );
-    console.log(`this.availablePlanets = `, this.availablePlanets);
+  }
+
+  private maintainVehicles(selectedDestination: SelectedDestination): void {
+    // If a vehicle has been selected, reduce it's available count
+    const vehicleName: string = selectedDestination.vehicleName;
+    for (let vehicle of this.vehicles) {
+      if (vehicle.name === vehicleName && vehicle.total_no > 0) {
+        vehicle.total_no--;
+      }
+    }
   }
 
   private calculateTimeTaken(): number {

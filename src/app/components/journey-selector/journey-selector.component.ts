@@ -25,27 +25,48 @@ export class JourneySelectorComponent implements OnInit {
 
   journeyForm: FormGroup;
   selectedPlanetName: string;
+  displaySelectedVehicleErrorMessage: boolean = false;
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.journeyForm = this.formBuilder.group({
       planet: [""],
-      food: [""],
+      vehicle: [""],
       selectedPlanetName: [""]
     });
   }
 
   processDestination(): void {
+    if (!this.validateVehicle()) {
+      return;
+    }
+
     const selectedDest = new SelectedDestination(
       this.destinationNumber,
       this.journeyForm.value.planet,
-      this.journeyForm.value.food
+      this.journeyForm.value.vehicle
     );
     this.selectedPlanetName = this.journeyForm.value.planet;
     this.journeyForm.patchValue({
       selectedPlanetName: this.selectedPlanetName
     });
     this.selectedDestination.emit(selectedDest);
+  }
+
+  validateVehicle(): boolean {
+    this.displaySelectedVehicleErrorMessage = false;
+
+    const selectedVehicleName = this.journeyForm.value.vehicle;
+    const selectedVehicle: IVehicle = this.vehicles.find(
+      v => v.name === selectedVehicleName
+    );
+
+    if (selectedVehicle.total_no === 0) {
+      this.displaySelectedVehicleErrorMessage = true;
+      return false;
+    }
+
+    return true;
   }
 }

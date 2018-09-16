@@ -28,21 +28,21 @@ export class ApiService {
 
   getToken(): Observable<any> {
     return this.http.post<string>(this.tokenUrl, "", this.httpOptions).pipe(
-      tap(data => console.log("All: " + JSON.stringify(data))),
+      //tap(data => console.log("All: " + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
 
   getPlanets(): Observable<IPlanet[]> {
     return this.http.get<IPlanet[]>(this.planetsUrl).pipe(
-      tap(data => console.log("All: " + JSON.stringify(data))),
+      //tap(data => console.log("All: " + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
 
   getVehicles(): Observable<IVehicle[]> {
     return this.http.get<IVehicle[]>(this.vehiclesUrl).pipe(
-      tap(data => console.log("All: " + JSON.stringify(data))),
+      //tap(data => console.log("All: " + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
@@ -60,7 +60,7 @@ export class ApiService {
     return this.http
       .post<string>(this.findFalconeUrl, findFalconeRequest, httpOptions)
       .pipe(
-        tap(data => console.log("All: " + JSON.stringify(data))),
+        //tap(data => console.log("All: " + JSON.stringify(data))),
         catchError(this.handleError)
       );
   }
