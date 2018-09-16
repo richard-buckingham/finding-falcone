@@ -51,6 +51,10 @@ export class JourneySelectorComponent implements OnInit {
     this.journeyForm.patchValue({
       selectedPlanetName: this.selectedPlanetName
     });
+    this.emitSelectedDestination(selectedDest);
+  }
+
+  emitSelectedDestination(selectedDest: SelectedDestination): void {
     this.selectedDestination.emit(selectedDest);
   }
 
